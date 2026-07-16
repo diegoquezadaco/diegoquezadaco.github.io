@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM-Powered WhatsApp Assistant — Diego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header data-include="/partials/header.html"></header>
+
+<main>
+  <section class="project-hero wrap" style="border-top:none;">
+    <a class="back-link reveal" href="/projects.html">&larr; All projects</a>
+    <span class="project-context reveal">Lidh</span>
+    <h1 class="reveal">LLM-powered WhatsApp assistant</h1>
+    <p class="lede reveal">
+      Designed and shipped a WhatsApp chatbot backed by an LLM pipeline,
+      handling conversational state, prompt design, and response
+      reliability for real user traffic.
+    </p>
+    <div class="project-tags reveal">
+      <span class="tag">LLM applications</span><span class="tag">Prompt engineering</span><span class="tag">Product</span>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top:0;border-top:none;">
+
+    <!-- TODO: add product screenshots (phone-mockup style images work well here) -->
+    <div class="media-grid reveal">
+      <div class="media-block">
+        <img src="/images/projects/lidh-whatsapp-llm/chat-1.jpg" alt="Chatbot conversation example 1">
+        <div class="media-caption">Sample conversation flow.</div>
+      </div>
+      <div class="media-block">
+        <img src="/images/projects/lidh-whatsapp-llm/chat-2.jpg" alt="Chatbot conversation example 2">
+        <div class="media-caption">Handling a multi-turn user request.</div>
+      </div>
+    </div>
+
+    <div class="project-links reveal" style="margin-bottom:40px;">
+      <!-- TODO: link repo / product page if shareable -->
+      <a href="#" target="_blank" rel="noopener">Repository &rarr;</a>
+    </div>
+
+    <div class="prose reveal">
+      <h2>The problem</h2>
+      <p>
+        Users needed a conversational way to interact with the product
+        directly inside WhatsApp, with responses reliable enough to handle
+        real, unscripted traffic.
+      </p>
+      <h2>Approach</h2>
+      <p>
+        Built the conversational pipeline end to end: message handling,
+        conversational state management, prompt design, and guardrails
+        around response reliability, deployed against the WhatsApp Business
+        API.
+      </p>
+      <ul>
+        <li>Conversational state tracked across multi-turn exchanges</li>
+        <li>Prompt design tuned for consistent, on-brand responses</li>
+        <li>Deployed and monitored against real user traffic</li>
+      </ul>
+      <h2>Results</h2>
+      <p>
+        Shipped a working assistant handling real conversations in
+        production for Lidh's user base.
+      </p>
+    </div>
+
+  </section>
+</main>
+
+<footer id="contact" data-include="/partials/footer.html"></footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
