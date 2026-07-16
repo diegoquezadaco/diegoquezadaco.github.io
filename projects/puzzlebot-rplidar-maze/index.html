@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Maze Navigation — Puzzlebot RPLIDAR Edition — Diego Quezada Colorado</title>
+  <meta name="description" content="Autonomous exploration and maze navigation stack for a differential-drive robot, developed in collaboration with Manchester Robotics (UK)." />
+
+  <script src="../../js/theme-init.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body data-root-depth="2" data-page="projects">
+
+  <div data-include="header"></div>
+
+  <main id="main">
+    <section style="padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: 0;">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/index.html">Home</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          <a href="/projects.html">Projects</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          <span>Puzzlebot RPLIDAR Maze</span>
+        </nav>
+
+        <h1 class="project-detail-title">Autonomous Maze Navigation — Puzzlebot RPLIDAR Edition</h1>
+        <p class="project-detail-summary">Autonomous exploration challenge developed in collaboration with Manchester Robotics (UK).</p>
+      </div>
+    </section>
+
+    <section style="padding-top: 2rem;">
+      <div class="container">
+
+        <div class="project-hero-media">
+          <!-- REPLACE VIDEO: videos/projects/puzzlebot-rplidar-maze/hero.mp4 -->
+          <video autoplay loop muted playsinline poster="">
+            <source src="../../videos/projects/puzzlebot-rplidar-maze/hero.mp4" type="video/mp4" />
+          </video>
+          <div class="project-media-placeholder" style="position:absolute; inset:0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+            <span>REPLACE HERO VIDEO<br />videos/projects/puzzlebot-rplidar-maze/hero.mp4</span>
+          </div>
+        </div>
+
+        <div class="project-meta-row">
+          <div class="meta-item">
+            <span class="meta-label">Start Date</span>
+            <span class="meta-value">March 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">End Date</span>
+            <span class="meta-value">June 2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">~4 months</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">Lead Developer &amp; Project Manager</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Technologies</span>
+            <span class="meta-value">ROS2, RPLIDAR A1, EKF, ArUco</span>
+          </div>
+        </div>
+
+        <div class="project-detail-grid">
+          <div class="project-detail-body">
+
+            <h2>Overview</h2>
+            <p>
+              An autonomous exploration challenge developed in collaboration with Manchester Robotics
+              (UK), tasking a differential-drive Puzzlebot with navigating an unknown maze using only
+              onboard LiDAR, wheel encoders, and ArUco marker detections — no external localization.
+            </p>
+
+            <h2>Responsibilities</h2>
+            <ul>
+              <li>Led a team of four to design and build a full autonomous navigation stack on a differential-drive robot.</li>
+              <li>Implemented Bug 0 and Bug 2 navigation algorithms together with a wall-following controller.</li>
+              <li>Developed a custom LiDAR discontinuity detector to overcome RPLIDAR A1 hardware limitations.</li>
+              <li>Fused wheel encoder odometry with an Extended Kalman Filter and ArUco marker detections to reduce localization drift.</li>
+              <li>Managed team planning, task delegation, and integration testing across the four-month development cycle.</li>
+            </ul>
+
+            <h2>Technical Challenges</h2>
+            <ul>
+              <li>
+                Disambiguating outer maze corners from wall endings using only 2D LiDAR range data — solved
+                with a custom jump-based discontinuity detector
+                (<code>OUTER_ESCAPE_JUMP_THRESHOLD = 0.50 m</code>) that flags large radial jumps between
+                consecutive LiDAR readings to distinguish a genuine outer corner from open space where a
+                wall simply ends.
+              </li>
+              <li>Reducing cumulative odometry drift over long maze traversals by fusing encoder data with sparse ArUco marker detections in an EKF.</li>
+              <li>Tuning the wall-following controller to reliably handle inner corners, outer corners, and wall endings without oscillation or stalling.</li>
+              <li>Coordinating a four-person team across perception, control, localization, and integration workstreams.</li>
+            </ul>
+
+            <h2>Results</h2>
+            <ul>
+              <li>Achieved five-waypoint maze navigation with approximately 5 cm average real-world localization error.</li>
+              <li>Successfully demonstrated robust handling of inner corners, outer corners, and wall-ending ambiguity in live trials.</li>
+            </ul>
+
+            <h2>Gallery</h2>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <div class="gallery-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span>images/projects/puzzlebot-rplidar-maze/01.jpg</span>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <div class="gallery-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span>images/projects/puzzlebot-rplidar-maze/02.jpg</span>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <div class="gallery-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span>images/projects/puzzlebot-rplidar-maze/03.jpg</span>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <div class="gallery-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  <span>images/projects/puzzlebot-rplidar-maze/04.jpg</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <aside class="project-sidebar">
+            <div class="sidebar-card">
+              <h3>Resources</h3>
+              <div class="sidebar-btn-list">
+                <a href="../../res/puzzlebot-rplidar-maze-report.pdf" class="btn btn-outline btn-sm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+                  Technical Report (PDF)
+                </a>
+                <a href="https://github.com/diegoquezadaco" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-1.94c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.53-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.16v3.2c0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                  GitHub Repository
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>
