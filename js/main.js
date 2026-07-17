@@ -105,6 +105,56 @@ function initHeaderScrollState() {
   }, { passive: true });
 }
 
+/**
+ * Media fallback system.
+ *
+ * Every media slot on the site is built as:
+ *   <div class="project-media">
+ *     <img class="media-fallback" src="images/placeholders/media-16x10.svg">
+ *     <video data-video-src="videos/projects/<slug>/demo.mp4" muted loop playsinline></video>
+ *   </div>
+ *
+ * The placeholder <img> is always the base layer, so nothing ever shows a
+ * blank/black box. We only attempt to load+play the real video, and only
+ * reveal it (via the .has-video class) once it has actually loaded some
+ * data. If it 404s or fails, the placeholder just stays visible — no
+ * console-visible broken box, no silent failure the person can't see.
+ */
+function initMediaFallbacks() {
+  document.querySelectorAll('video[data-video-src]').forEach(function (video) {
+    var src = video.getAttribute('data-video-src');
+    if (!src) return;
+    var wrapper = video.closest('.project-media, .project-hero-media, .gallery-item');
+
+    var source = document.createElement('source');
+    source.setAttribute('src', src);
+    source.setAttribute('type', 'video/mp4');
+    video.appendChild(source);
+
+    video.addEventListener('loadeddata', function () {
+      if (wrapper) wrapper.classList.add('has-video');
+      video.play().catch(function () { /* autoplay may be blocked; fine */ });
+    });
+
+    video.addEventListener('error', function () {
+      // Leave the placeholder image visible; do not add .has-video.
+    });
+
+    video.load();
+  });
+
+  // Plain <img> tags (galleries, logos, profile photo) get a graceful
+  // fallback to a labeled placeholder graphic if the real asset 404s.
+  document.querySelectorAll('img[data-fallback]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      if (img.src !== img.getAttribute('data-fallback')) {
+        img.src = img.getAttribute('data-fallback');
+        img.classList.add('is-placeholder');
+      }
+    }, { once: false });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
   await loadPartial('[data-include="header"]', 'partials/header.html');
   await loadPartial('[data-include="footer"]', 'partials/footer.html');
@@ -116,4 +166,5 @@ document.addEventListener('DOMContentLoaded', async function () {
   initFooterYear();
   initHeaderScrollState();
   initScrollReveal();
+  initMediaFallbacks();
 });

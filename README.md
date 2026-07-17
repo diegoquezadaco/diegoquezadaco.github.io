@@ -21,7 +21,43 @@ js/theme-init.js          Runs in <head>, sets the saved theme before first pain
 js/main.js                Loads partials, mobile nav, scroll reveal, theme toggle
 ```
 
-## Theme (Light / Dark)
+## Media placeholders (no more 404s or broken boxes)
+
+Every image and video slot on the site is built with a fallback-first pattern:
+
+- **Videos**: a real `<img class="media-fallback">` (pointing at a "CHANGE ME" SVG in
+  `images/placeholders/`) sits underneath the `<video data-video-src="...">`. JS (`js/main.js`)
+  only tries to load the video, and only reveals it, once it has actually loaded data. If the
+  video file is missing, the placeholder graphic just stays visible — never a black box or a
+  browser error icon.
+- **Images** (gallery photos, profile photo): `<img src="the real path" data-fallback="images/placeholders/....svg">`.
+  If the real file 404s, JS swaps in the placeholder graphic automatically.
+
+To replace a placeholder, just drop your real file at the path already referenced in the HTML
+(e.g. `videos/projects/<slug>/demo.mp4` or `images/projects/<slug>/01.jpg`) — no HTML/CSS changes
+needed, the fallback disengages automatically once the real file loads successfully.
+
+The placeholder graphics themselves live in `images/placeholders/` (`media-16x10.svg`,
+`media-16x8.svg`, `gallery-4x3.svg`, `profile.svg`, `logo.svg`) if you want to restyle them.
+
+## Layout
+
+The site uses a wider container (1360px) and denser spacing throughout — sections, cards, and
+type sizes are intentionally compact so more content is visible per scroll, and content is
+left-weighted rather than centered (hero text takes ~⅔ width with a small photo on the right,
+About is a narrow stat column next to a wider text column, etc.). Featured projects and the full
+projects listing both use a 3-column grid down to tablet width, collapsing to 2 then 1 column on
+smaller screens.
+
+## Light/Dark theme & readability
+
+`color-scheme: light` / `color-scheme: dark` is declared explicitly in both CSS and a `<meta
+name="color-scheme">` tag on every page. This prevents browsers with an OS-level dark mode
+preference from auto-darkening native UI (form fields, scrollbars) independently of the site's
+own light/dark toggle, which is what causes white-text-on-white-background rendering bugs on some
+devices.
+
+
 
 - Default is **light**. A toggle button in the nav bar switches themes.
 - The choice is saved to `localStorage` and restored on every visit.
@@ -30,44 +66,30 @@ js/main.js                Loads partials, mobile nav, scroll reveal, theme toggl
 
 ## Adding a profile photo
 
-Replace the placeholder block in `index.html`'s hero section:
-
-```html
-<div class="hero-photo-wrap">
-  <div class="hero-photo">
-    <img src="images/profile.jpg" alt="Diego Quezada Colorado">
-  </div>
-</div>
-```
-
-Delete the `<div class="hero-photo-placeholder">…</div>` markup once the image is in place.
+Just drop your file at `images/profile.jpg` (create the `images/` file with exactly that name).
+The hero section already points there — nothing else to edit. Until the file exists, a "CHANGE ME"
+placeholder graphic shows automatically instead of a broken image.
 
 ## Replacing a project video
 
-Every featured/detail project card has a placeholder `<video>` pointing at a path like:
+Every featured/detail project card already points at a path like:
 
 ```
 videos/projects/<slug>/demo.mp4       (card previews on index.html / projects.html)
 videos/projects/<slug>/hero.mp4       (large hero video on the project detail page)
 ```
 
-1. Drop your `.mp4` into the matching folder.
-2. The `<video autoplay loop muted playsinline>` tag is already wired up — no HTML changes needed
-   if you keep the same filename. Otherwise update the `<source src="...">`.
-3. The dashed placeholder box automatically sits behind the video and is simply hidden once real
-   video content is present visually; you can delete the `.project-media-placeholder` /
-   `.gallery-placeholder` `<div>` once you've added real media, though leaving it is harmless.
+Just drop your `.mp4` into the matching folder with that exact filename — no HTML/CSS edits
+needed. The page checks whether the video actually loads; if it does, the video replaces the
+placeholder automatically, and if it doesn't (wrong filename, not uploaded yet), the placeholder
+graphic just stays visible instead of showing a broken/black box.
 
 ## Adding a photo to a project gallery
 
-Drop the file into `images/projects/<slug>/` and replace the corresponding
-`<div class="gallery-item">` placeholder with:
-
-```html
-<div class="gallery-item">
-  <img src="../../images/projects/<slug>/01.jpg" alt="Description">
-</div>
-```
+Drop the file into `images/projects/<slug>/` using the filename already referenced in that
+project's gallery (`01.jpg`, `02.jpg`, etc. — check the project's `index.html` for the exact
+names). No HTML changes needed; the placeholder swaps out automatically once the real file is
+present.
 
 ## Adding a PDF (technical report, CV, paper)
 
