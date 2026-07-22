@@ -399,7 +399,7 @@ section {
 
 .hero-photo {
   width: 100%;
-  max-width: 220px;
+  max-width: 280px;
   margin-left: auto;
   aspect-ratio: 1 / 1.05;
   border-radius: var(--radius-md);
