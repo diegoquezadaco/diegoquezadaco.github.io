@@ -2,26 +2,6 @@
 
 Personal portfolio — editorial, minimal, black/white with a blue accent, light/dark theme.
 
-## Structure
-
-```
-index.html              About / landing page (hero, about, featured projects,
-                         education, experience, certifications, skills, conferences)
-projects.html            Full project listing
-contact.html              Contact page
-projects/<slug>/          One folder per project, index.html is the detail page
-images/projects/<slug>/   Photos / screenshots for that project
-videos/projects/<slug>/   Demo clips (.mp4) for that project
-images/logos/             Company / university logos for the experience & education timelines
-images/profile.jpg        Your professional photo (add this file)
-res/                      CV, technical reports, and any other downloadable PDFs
-partials/                 Shared header.html and footer.html
-css/style.css             All site styles (theme tokens, layout, components)
-js/theme-init.js          Runs in <head>, sets the saved theme before first paint (no flash)
-js/main.js                Loads partials, mobile nav, scroll reveal, theme toggle
-```
-
-
 ## Layout
 
 The site uses a wider container (1360px) and denser spacing throughout — sections, cards, and
